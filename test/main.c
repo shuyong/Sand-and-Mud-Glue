@@ -602,9 +602,6 @@ int main (int argc, const char *argv[])
 	}
 	ANativeBufferUnlock(gbuffer);
 
-	printf ("Destroy the native buffer.\n");
-	ANativeBufferDtor(gbuffer);
-
 	printf ("Destroy EGL resource.\n");
         if (display != EGL_NO_DISPLAY) {
             eglMakeCurrent(display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
@@ -616,6 +613,11 @@ int main (int argc, const char *argv[])
             }
             eglTerminate(display);
 	}
+
+	printf ("Destroy the native buffer by myself.\n");
+	//ANativeBufferDtor(gbuffer);
+	nwb->common.decRef(&nwb->common);
+
 	/*************************************************************/
 	printf ("******************************\n");
 	printf ("Test Offscreen Native Window.\n");
@@ -639,7 +641,7 @@ int main (int argc, const char *argv[])
 
         surface = eglCreateWindowSurface(display, config, (EGLNativeWindowType)window, NULL);
         if (surface == EGL_NO_SURFACE) {
-	    fprintf (stderr, "Unable to eglCreateWindowSurface");
+	    fprintf (stderr, "Unable to eglCreateWindowSurface.\n");
     	    return -1;
         } else {
     	    printf("eglCreateWindowSurface successful.\n");
@@ -765,8 +767,9 @@ int main (int argc, const char *argv[])
         }
 
 	/* FIXME: android space function. */
-	printf ("Destroy Native Window resource.\n");
-	OffscreenNativeWindowDtor((OffscreenNativeWindow* )window);
+	printf ("Destroy Native Window resource by myself.\n");
+	//OffscreenNativeWindowDtor((OffscreenNativeWindow* )window);
+	window->common.decRef(&window->common);
 
     }
    

@@ -285,6 +285,24 @@ static int OffscreenNativeWindow_query(const struct ANativeWindow* window,
 		case NATIVE_WINDOW_MIN_UNDEQUEUED_BUFFERS:
 			*value = 1;
 			return NO_ERROR;
+		/* ANDROID_VERSION_MAJOR>=6 */
+		case NATIVE_WINDOW_DEFAULT_DATASPACE:
+			*value = /*HAL_DATASPACE_UNKNOWN*/ 0;
+			return NO_ERROR;
+#if 0
+		case NATIVE_WINDOW_CONSUMER_USAGE_BITS:
+			*value = self->getUsage();
+			return NO_ERROR;
+#endif
+		/* ANDROID_VERSION_MAJOR>=8 */
+		case NATIVE_WINDOW_IS_VALID:
+			// sure :)
+			*value = 1;
+			return NO_ERROR;
+		case NATIVE_WINDOW_BUFFER_AGE:
+			// sure :)
+			*value = 2;
+			return NO_ERROR;
 	}
 
 	*value = 0;

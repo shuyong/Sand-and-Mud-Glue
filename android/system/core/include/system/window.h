@@ -277,6 +277,51 @@ enum {
      * age will be 0.
      */
     NATIVE_WINDOW_BUFFER_AGE = 13,
+
+    /*
+     * Returns the duration of the last dequeueBuffer call in microseconds
+     */
+    NATIVE_WINDOW_LAST_DEQUEUE_DURATION = 14,
+
+    /*
+     * Returns the duration of the last queueBuffer call in microseconds
+     */
+    NATIVE_WINDOW_LAST_QUEUE_DURATION = 15,
+
+    /*
+     * Returns the number of image layers that the ANativeWindow buffer
+     * contains. By default this is 1, unless a buffer is explicitly allocated
+     * to contain multiple layers.
+     */
+    NATIVE_WINDOW_LAYER_COUNT = 16,
+
+    /*
+     * Returns 1 if the native window is valid, 0 otherwise. native window is valid
+     * if it is safe (i.e. no crash will occur) to call any method on it.
+     */
+    NATIVE_WINDOW_IS_VALID = 17,
+
+    /*
+     * Returns 1 if NATIVE_WINDOW_GET_FRAME_TIMESTAMPS will return display
+     * present info, 0 if it won't.
+     */
+    NATIVE_WINDOW_FRAME_TIMESTAMPS_SUPPORTS_PRESENT = 18,
+
+    /*
+     * The consumer end is capable of handling protected buffers, i.e. buffer
+     * with GRALLOC_USAGE_PROTECTED usage bits on.
+     */
+    NATIVE_WINDOW_CONSUMER_IS_PROTECTED = 19,
+
+    /*
+     * Returns data space for the buffers.
+     */
+    NATIVE_WINDOW_DATASPACE = 20,
+
+    /*
+     * Returns maxBufferCount set by BufferQueueConsumer
+     */
+    NATIVE_WINDOW_MAX_BUFFER_COUNT = 21,
 };
 
 /* Valid operations for the (*perform)() hook.
